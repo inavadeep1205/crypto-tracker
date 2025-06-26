@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Price Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<div class="main">
+    <% if (locals.header && locals.price) { %>
+        <div class="crypto-icon">
+            <% if (header === 'Bitcoin') { %>
+                <i class="fab fa-bitcoin"></i>
+            <% } else if (header === 'Ethereum') { %>
+                <i class="fab fa-ethereum"></i>
+            <% } else if (header === 'Dogecoin') { %>
+                <i class="fas fa-dog"></i>
+            <% } else { %>
+                <i class="fas fa-coins"></i>
+            <% } %>
+        </div>
+        <h1><%= header %> Price</h1>
+        <div class="price-display">
+            <h2>INR Value</h2>
+            <div class="price-value">₹ <%= (inr_price * price).toFixed(2) %></div>
+            <h2>USDT Value</h2>
+            <div class="price-value">$ <%= price %></div>
+        </div>
+    <% } else if (locals.error) { %>
+        <div class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <h1>Error: <%= error%> Coin not available</h1>
+        </div>
+    <% } else { %>
+        <div class="crypto-icon">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <h1 class="display">Crypto Price Tracker</h1>
+        <p>Select a cryptocurrency to view its current price</p>
+    <% } %>
+
+    <div class="coins">
+        <form action="/view" method="POST">
+            <div class="select-wrapper">
+                <select name="coins" id="coins">
+                    <option value="BTC">Bitcoin (BTC)</option>
+                    <option value="ETH">Ethereum (ETH)</option>
+                    <option value="DOGE">Dogecoin (DOGE)</option>
+                    <option value="USD">Tether (USDT)</option>
+                </select>
+            </div>
+            <input id="sbt" type="submit" value="Get Price">
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>🚀 Built with ❤️ by <strong>B.Navadeep I.A.S</strong></p>
+    <div class="social-icons">
+        <a href="https://github.com/inavadeep1205" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://x.com/BeingNavadeep" target="_blank" title="Twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/navadeep-bitra-30a287256/" target="_blank" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+    </div>
+    <p style="margin-top: 15px;">© 2025 Crypto Tracker. All prices in real-time.</p>
+</footer>
+</body>
+</html>
